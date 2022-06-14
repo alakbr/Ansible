@@ -1,0 +1,14 @@
+---
+
+- hosts: demo
+  user: ansible
+  become: yes
+  connection: ssh
+  
+  tasks:
+    - name: Install httpd on nodes
+      action: yum name=httpd state=present
+      notify: restart HTTPD
+  handlers:
+    - name: restart HTTPD
+      action: service name=httpd state=restarted
